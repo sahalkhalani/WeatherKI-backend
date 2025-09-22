@@ -16,6 +16,8 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/weathe
 
 app.use(helmet());
 
+app.set('trust proxy', 1);
+
 // Rate limit
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -23,12 +25,11 @@ const limiter = rateLimit({
   message: errorMessages.RateLimitExceededMessage,
 });
 app.use(limiter);
-
 // CORS configuration
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? [process.env.FRONTEND_URL] 
-    : ['http://localhost:3000'],
+    : ['http://weather-ki-frontend.vercel.app/'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
