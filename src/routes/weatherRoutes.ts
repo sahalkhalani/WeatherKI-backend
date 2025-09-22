@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import weatherController from '../controllers/weatherController';
 import aiWeatherController from '../controllers/aiWeatherController'
-import geminiAIController from '../controllers/geminiAiController'
+import geminiAIController from '../controllers/geminiAIController'
 
 const router = Router();
 
